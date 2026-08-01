@@ -1,49 +1,14 @@
-import { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import ChatWindow from "../components/ChatWindow";
 import ChatInput from "../components/ChatInput";
-import { getBotReply } from "../utils/getBotReply";
+import useChat from "../hooks/useChat";
 
 function Home() {
-  const [messages, setMessages] = useState([
-    {
-      sender: "assistant",
-      text: "👋 Welcome to the GCE Tirunelveli AI Assistant!",
-    },
-  ]);
-
-  const [isTyping, setIsTyping] = useState(false);
-
-  const sendMessage = (text) => {
-    if (!text.trim()) return;
-
-    // Add user's message
-    setMessages((prev) => [
-      ...prev,
-      {
-        sender: "user",
-        text,
-      },
-    ]);
-
-    // Show typing indicator
-    setIsTyping(true);
-
-    // Simulate AI thinking
-    setTimeout(() => {
-      const reply = getBotReply(text);
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          sender: "assistant",
-          text: reply,
-        },
-      ]);
-
-      setIsTyping(false);
-    }, 1000);
-  };
+  const {
+    messages,
+    isTyping,
+    sendMessage,
+  } = useChat();
 
   return (
     <MainLayout>
