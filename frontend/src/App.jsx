@@ -4,4 +4,4 @@ function App() {
   return <AppRoutes />;
 }
 
-export default App;s
+export default App;
